@@ -8,7 +8,7 @@ export default function Footer() {
 
   return (
     <footer className="relative bg-[#070709] border-t border-zinc-900 py-12 text-zinc-500 text-xs">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div data-aos="fade-up" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           
           {/* Logo & Description */}
@@ -39,11 +39,11 @@ export default function Footer() {
             </a>
 
             <a
-              href="mailto:shaikfazil0107@gmail.com"
+              href="mailto:fazilshaik103@gmail.com"
               className="text-zinc-400 hover:text-orange-400 transition-colors flex items-center gap-1.5"
             >
               <Mail className="w-4 h-4" />
-              <span>shaikfazil0107@gmail.com</span>
+              <span>fazilshaik103@gmail.com</span>
             </a>
 
             <button
@@ -65,7 +65,7 @@ export default function Footer() {
           </div>
           <div className="font-mono flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-            <span>$2,500 Target Turnkey • Available for Projects</span>
+            <span>$500 Target Turnkey • Available for Projects</span>
           </div>
         </div>
       </div>

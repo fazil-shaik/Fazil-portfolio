@@ -92,3 +92,68 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+/* -------------------------------------------------------------
+   Animate On Scroll (AOS) Hardware-Accelerated Engine
+------------------------------------------------------------- */
+[data-aos] {
+  opacity: 0;
+  transition-property: opacity, transform;
+  transition-duration: 800ms;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+/* Bottom Up (fade-up) */
+[data-aos="fade-up"] {
+  transform: translate3d(0, 36px, 0);
+}
+
+/* Top Down (fade-down) */
+[data-aos="fade-down"] {
+  transform: translate3d(0, -36px, 0);
+}
+
+/* Left / Right */
+[data-aos="fade-left"] {
+  transform: translate3d(36px, 0, 0);
+}
+
+[data-aos="fade-right"] {
+  transform: translate3d(-36px, 0, 0);
+}
+
+/* Subtle Zoom */
+[data-aos="zoom-in"] {
+  transform: scale3d(0.95, 0.95, 1);
+}
+
+/* Triggered State */
+[data-aos].aos-animate {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+}
+
+/* Delay Presets */
+[data-aos-delay="50"]  { transition-delay: 50ms; }
+[data-aos-delay="100"] { transition-delay: 100ms; }
+[data-aos-delay="150"] { transition-delay: 150ms; }
+[data-aos-delay="200"] { transition-delay: 200ms; }
+[data-aos-delay="250"] { transition-delay: 250ms; }
+[data-aos-delay="300"] { transition-delay: 300ms; }
+[data-aos-delay="350"] { transition-delay: 350ms; }
+[data-aos-delay="400"] { transition-delay: 400ms; }
+[data-aos-delay="500"] { transition-delay: 500ms; }
+
+/* Duration Presets */
+[data-aos-duration="600"]  { transition-duration: 600ms; }
+[data-aos-duration="800"]  { transition-duration: 800ms; }
+[data-aos-duration="1000"] { transition-duration: 1000ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

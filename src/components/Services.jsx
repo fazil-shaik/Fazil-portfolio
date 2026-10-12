@@ -11,7 +11,7 @@ export default function Services() {
     {
       icon: <PhoneCall className="w-5 h-5 text-orange-400" />,
       title: 'High-Ticket Lead Conversion Funnel',
-      description: 'Engineered specifically for $10k–$60k roofing and remodeling jobs: 60-second instant estimate forms, storm damage photo uploads, and persistent mobile tap-to-call bars.',
+      description: 'Engineered specifically for $10k - $60k roofing and remodeling jobs: 60-second instant estimate forms, storm damage photo uploads, and persistent mobile tap-to-call bars.',
     },
     {
       icon: <Smartphone className="w-5 h-5 text-orange-400" />,
@@ -40,15 +40,15 @@ export default function Services() {
     { feature: 'Visual Uniqueness', custom: '100% Unique & Premium', template: 'Identical to 500 other roofers' },
     { feature: 'Homeowner Conversion', custom: 'Tailored 60-sec Quote Funnel', template: 'Generic contact form with low response' },
     { feature: 'Security & Maintenance', custom: 'Zero Plugin Hacks / No Updates Needed', template: 'Constant updates, vulnerability risks' },
-    { feature: 'Pricing Transparency', custom: 'Flat $2,500 One-Time (You Own It)', template: '$150-$400/month recurring forever' },
+    { feature: 'Pricing Transparency', custom: 'Flat $500 One-Time (You Own It)', template: '$150-$400/month recurring forever' },
   ];
 
   return (
     <section id="services" className="relative py-28 bg-[#09090b] border-t border-zinc-800/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        {/* Section Header (Top-down entrance) */}
+        <div data-aos="fade-down" className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-xs font-mono text-orange-400 mb-4">
             <Zap className="w-3.5 h-3.5" />
             <span>Turnkey Contractor Service</span>
@@ -64,8 +64,8 @@ export default function Services() {
           </p>
         </div>
 
-        {/* Pricing Card Highlight */}
-        <div className="mb-16 p-8 sm:p-10 rounded-3xl bg-gradient-to-b from-zinc-900/90 to-zinc-950 border border-orange-500/30 shadow-2xl shadow-orange-500/10 relative overflow-hidden">
+        {/* Pricing Card Highlight (Bottom-up entrance) */}
+        <div data-aos="fade-up" data-aos-delay="100" className="mb-16 p-8 sm:p-10 rounded-3xl bg-gradient-to-b from-zinc-900/90 to-zinc-950 border border-orange-500/30 shadow-2xl shadow-orange-500/10 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-80 h-80 bg-orange-500/10 rounded-full blur-3xl pointer-events-none" />
           
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 relative z-10">
@@ -77,14 +77,14 @@ export default function Services() {
                 Everything Your Business Needs to Dominate Online
               </h3>
               <p className="mt-2 text-sm sm:text-base text-zinc-400 max-w-2xl">
-                Custom visual design, interactive before/after gallery, quote estimator, local SEO foundation, and mobile optimization. Completed in 2–3 weeks.
+                Custom visual design, interactive before/after gallery, quote estimator, local SEO foundation, and mobile optimization. Completed in 2-3 weeks.
               </p>
             </div>
 
             <div className="text-left lg:text-right shrink-0 bg-black/40 p-6 rounded-2xl border border-white/5">
               <div className="text-xs font-mono text-zinc-400 uppercase tracking-wider">Fixed Investment</div>
               <div className="text-4xl sm:text-5xl font-extrabold text-white font-mono text-orange-400 my-1">
-                $2,500
+                $500
               </div>
               <div className="text-xs text-zinc-400">Flat rate • No monthly retainers</div>
               <a
@@ -97,11 +97,13 @@ export default function Services() {
           </div>
         </div>
 
-        {/* 6-Grid Deliverables */}
+        {/* 6-Grid Deliverables (Staggered bottom-up entrance) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {deliverables.map((item, index) => (
             <div
               key={index}
+              data-aos="fade-up"
+              data-aos-delay={index * 100 + 100}
               className="p-6 rounded-2xl bg-zinc-900/40 border border-white/5 hover:border-orange-500/30 transition-all duration-300 hover:-translate-y-1 group"
             >
               <div className="w-12 h-12 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
@@ -119,7 +121,7 @@ export default function Services() {
 
         {/* Comparison Section */}
         <div className="mt-20">
-          <div className="text-center max-w-2xl mx-auto mb-10">
+          <div data-aos="fade-down" className="text-center max-w-2xl mx-auto mb-10">
             <h3 className="text-2xl font-bold text-white">
               Why Custom Engineering Beats WordPress & Generic Templates
             </h3>
@@ -128,12 +130,12 @@ export default function Services() {
             </p>
           </div>
 
-          <div className="overflow-x-auto">
+          <div data-aos="fade-up" data-aos-delay="150" className="overflow-x-auto">
             <table className="w-full text-left text-sm border-collapse rounded-2xl overflow-hidden bg-zinc-900/60 border border-white/10">
               <thead>
                 <tr className="border-b border-zinc-800 bg-zinc-950/80">
                   <th className="py-4 px-6 text-zinc-300 font-semibold font-mono text-xs uppercase">Evaluation Factor</th>
-                  <th className="py-4 px-6 text-orange-400 font-bold font-mono text-xs uppercase bg-orange-500/10">Fazil's Custom Build ($2,500)</th>
+                  <th className="py-4 px-6 text-orange-400 font-bold font-mono text-xs uppercase bg-orange-500/10">Fazil's Custom Build ($500)</th>
                   <th className="py-4 px-6 text-zinc-400 font-semibold font-mono text-xs uppercase">Generic WordPress / Agency Templates</th>
                 </tr>
               </thead>

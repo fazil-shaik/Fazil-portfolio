@@ -7,7 +7,7 @@ export default function FAQ() {
   const faqs = [
     {
       q: 'How much does a custom contractor website cost?',
-      a: 'The flagship turnkey contractor website package is a flat $2,500 investment. This includes custom 3D and UI design, complete frontend development, interactive quote calculator, mobile-first responsive optimization, local SEO schema, domain configuration, and 30 days of post-launch support. No surprise hourly fees.',
+      a: 'The flagship turnkey contractor website package is a flat $500 investment. This includes custom 3D and UI design, complete frontend development, interactive quote calculator, mobile-first responsive optimization, local SEO schema, domain configuration, and 30 days of post-launch support. No surprise hourly fees.',
     },
     {
       q: 'What is the turnaround timeline from kickoff to launch?',
@@ -23,7 +23,7 @@ export default function FAQ() {
     },
     {
       q: 'Are there mandatory monthly retainers or locked contracts?',
-      a: 'No. You own 100% of your website code, assets, and domain. Modern static and serverless architectures cost pennies (often $0–$15/month for cloud hosting via Vercel or Netlify) compared to expensive $200–$500/month agency retainers. If you want ongoing monthly updates or SEO campaigns, we can arrange that separately.',
+      a: 'No. You own 100% of your website code, assets, and domain. Modern static and serverless architectures cost pennies (often $0 - $15/month for cloud hosting via Vercel or Netlify) compared to expensive $200 - $500/month agency retainers. If you want ongoing monthly updates or SEO campaigns, we can arrange that separately.',
     },
     {
       q: 'How do homeowner leads reach me when they submit a form or estimate?',
@@ -35,8 +35,8 @@ export default function FAQ() {
     <section id="faq" className="relative py-28 bg-[#0b0c10] border-t border-zinc-800/80">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
-        {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        {/* Section Header (Top-down entrance) */}
+        <div data-aos="fade-down" className="text-center max-w-2xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900 border border-orange-500/30 text-xs font-mono text-orange-400 mb-4">
             <HelpCircle className="w-3.5 h-3.5" />
             <span>Frequently Asked Questions</span>
@@ -52,13 +52,15 @@ export default function FAQ() {
           </p>
         </div>
 
-        {/* Accordion */}
+        {/* Accordion (Staggered bottom-up entrance) */}
         <div className="space-y-4">
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
               <div
                 key={index}
+                data-aos="fade-up"
+                data-aos-delay={index * 60 + 50}
                 className="rounded-2xl bg-zinc-900/60 border border-white/5 hover:border-orange-500/30 transition-colors overflow-hidden"
               >
                 <button

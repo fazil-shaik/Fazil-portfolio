@@ -9,8 +9,11 @@ import About from './components/About';
 import FAQ from './components/FAQ';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import { useAOS } from './hooks/useAOS';
 
 export default function App() {
+  useAOS();
+
   return (
     <div className="relative min-h-screen bg-[#09090b] text-[#f4f4f5] overflow-x-hidden selection:bg-orange-500/30 selection:text-orange-200">
       {/* 3D WebGL Atmospheric Background */}

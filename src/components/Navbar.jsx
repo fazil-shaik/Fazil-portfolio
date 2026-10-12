@@ -63,11 +63,11 @@ export default function Navbar() {
           {/* Primary Action Button */}
           <div className="hidden md:flex items-center gap-4">
             <div className="text-right">
-              <span className="block text-[10px] text-emerald-400 font-mono uppercase tracking-wider flex items-center justify-end gap-1">
+              <span className="text-[10px] text-emerald-400 font-mono uppercase tracking-wider flex items-center justify-end gap-1">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
                 Taking Projects
               </span>
-              <span className="text-xs text-zinc-400 font-mono">$2,500 / project</span>
+              <span className="text-xs text-zinc-400 font-mono">$500 / project</span>
             </div>
             <a
               href="#contact"
@@ -84,7 +84,7 @@ export default function Navbar() {
           <div className="flex md:hidden items-center gap-2">
             <a
               href="#contact"
-              className="px-3 py-1.5 text-xs font-semibold text-white bg-orange-500 rounded-lg shadow-sm"
+              className="px-3.5 py-1.5 text-xs font-semibold text-white bg-gradient-to-r from-orange-500 to-amber-600 rounded-lg shadow-sm"
             >
               Let's Talk
             </a>
@@ -118,7 +118,7 @@ export default function Navbar() {
           <div className="pt-4 border-t border-zinc-800 flex flex-col gap-3">
             <div className="flex items-center justify-between text-xs text-zinc-400 font-mono">
               <span>Target Rate</span>
-              <span className="text-orange-400 font-bold">$2,500 Fixed</span>
+              <span className="text-orange-400 font-bold">$500 Fixed</span>
             </div>
             <a
               href="#contact"

@@ -8,8 +8,8 @@ export default function About() {
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
-          {/* Left Column: Visual Profile Card */}
-          <div className="lg:col-span-5">
+          {/* Left Column: Visual Profile Card (Bottom-up entrance) */}
+          <div data-aos="fade-up" data-aos-delay="100" className="lg:col-span-5">
             <div className="relative rounded-3xl bg-zinc-900/80 border border-white/10 p-7 sm:p-8 shadow-2xl overflow-hidden">
               <div className="absolute top-0 right-0 w-48 h-48 bg-orange-500/15 rounded-full blur-2xl pointer-events-none" />
               
@@ -46,7 +46,7 @@ export default function About() {
                 </div>
                 <div className="flex items-center justify-between text-xs">
                   <span className="text-zinc-400 font-mono">Target Rate</span>
-                  <span className="text-emerald-400 font-semibold">$2,500 Flat Investment</span>
+                  <span className="text-emerald-400 font-semibold">$500 Flat Investment</span>
                 </div>
               </div>
 
@@ -72,19 +72,19 @@ export default function About() {
 
           {/* Right Column: Story & Philosophy */}
           <div className="lg:col-span-7 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-xs font-mono text-orange-400">
+            <div data-aos="fade-down" className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-xs font-mono text-orange-400">
               <User className="w-3.5 h-3.5" />
               <span>Developer Background & Approach</span>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
+            <h2 data-aos="fade-down" data-aos-delay="100" className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
               Why I Specialize in Websites for{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-300">
                 Roofing & Remodeling Contractors
               </span>
             </h2>
 
-            <div className="space-y-4 text-zinc-300 text-sm sm:text-base leading-relaxed">
+            <div data-aos="fade-up" data-aos-delay="150" className="space-y-4 text-zinc-300 text-sm sm:text-base leading-relaxed">
               <p>
                 In the home improvement industry, trust is everything. Homeowners are deciding whether to spend <strong className="text-white">$15,000 to $60,000+</strong> on a new roof replacement, luxury kitchen renovation, or siding overhaul.
               </p>
@@ -96,8 +96,8 @@ export default function About() {
               </p>
             </div>
 
-            {/* Core Values */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+            {/* Core Values (Bottom-up entrance) */}
+            <div data-aos="fade-up" data-aos-delay="200" className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
               <div className="p-4 rounded-xl bg-zinc-900/40 border border-white/5 space-y-1.5">
                 <div className="flex items-center gap-2 text-white font-semibold text-sm">
                   <CheckCircle2 className="w-4 h-4 text-orange-400" />
@@ -114,7 +114,7 @@ export default function About() {
                   Honest Flat Pricing
                 </div>
                 <p className="text-xs text-zinc-400">
-                  A predictable $2,500 target price. No hidden fees, surprise hourly invoices, or mandatory monthly retainers.
+                  A predictable $500 target price. No hidden fees, surprise hourly invoices, or mandatory monthly retainers.
                 </p>
               </div>
             </div>

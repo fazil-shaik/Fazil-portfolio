@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Send, CheckCircle2, AlertCircle, Copy, Check, Mail, MessageSquare, ArrowRight, ShieldCheck, Sparkles } from 'lucide-react';
+import { Send, CheckCircle2, AlertCircle, Copy, Check, Mail, MessageSquare, ArrowRight, ShieldCheck } from 'lucide-react';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -7,7 +7,7 @@ export default function Contact() {
     businessName: '',
     email: '',
     website: '',
-    budget: '$2,500 (Standard Turnkey)',
+    budget: '$500 (Standard Turnkey)',
     requirements: '',
   });
 
@@ -15,7 +15,7 @@ export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState(false);
 
-  const directEmail = 'shaikfazil0107@gmail.com'; // Verified contact address
+  const directEmail = 'fazilshaik103@gmail.com'; // Verified contact address
 
   const validate = () => {
     const errs = {};
@@ -63,8 +63,8 @@ export default function Contact() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        {/* Section Header (Top-down entrance) */}
+        <div data-aos="fade-down" className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-xs font-mono text-orange-400 mb-4">
             <Send className="w-3.5 h-3.5" />
             <span>Direct Project Inquiry</span>
@@ -82,8 +82,8 @@ export default function Contact() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
-          {/* Left Column: Direct Contact & Availability */}
-          <div className="lg:col-span-5 space-y-6">
+          {/* Left Column: Direct Contact & Availability (Bottom-up entrance) */}
+          <div data-aos="fade-up" data-aos-delay="100" className="lg:col-span-5 space-y-6">
             
             <div className="p-7 rounded-3xl bg-zinc-900/80 border border-white/10 shadow-xl space-y-6">
               <div>
@@ -123,7 +123,7 @@ export default function Contact() {
               <div className="space-y-3 pt-2 text-xs text-zinc-300">
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="w-4 h-4 text-orange-400 shrink-0" />
-                  <span>Target Flat Price: <strong>$2,500</strong> turnkey</span>
+                  <span>Target Flat Price: <strong>$500</strong> turnkey</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="w-4 h-4 text-orange-400 shrink-0" />
@@ -136,18 +136,18 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Quick Consultation Notice */}
-            <div className="p-6 rounded-2xl bg-orange-500/10 border border-orange-500/20 text-xs text-orange-200/90 leading-relaxed">
+            {/* Quick Consultation Notice (Bottom-up entrance) */}
+            <div data-aos="fade-up" data-aos-delay="200" className="p-6 rounded-2xl bg-orange-500/10 border border-orange-500/20 text-xs text-orange-200/90 leading-relaxed">
               <strong className="block text-white font-semibold mb-1 flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-orange-400" /> Free 15-Minute Website Audit
+                <ShieldCheck className="w-3.5 h-3.5 text-orange-400" /> Free 15-Minute Website Audit
               </strong>
               Already have an existing roofing or remodeling website? Include your URL and I will personally review your mobile responsiveness, page load speed, and conversion roadblocks prior to our call.
             </div>
 
           </div>
 
-          {/* Right Column: Inquiry Form */}
-          <div className="lg:col-span-7">
+          {/* Right Column: Inquiry Form (Bottom-up entrance) */}
+          <div data-aos="fade-up" data-aos-delay="150" className="lg:col-span-7">
             <div className="p-8 sm:p-10 rounded-3xl bg-zinc-900/90 border border-white/10 shadow-2xl relative">
               
               {submitted ? (
@@ -264,9 +264,9 @@ export default function Contact() {
                       onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
                       className="w-full px-4 py-3 rounded-xl bg-black/50 border border-zinc-700 text-white text-sm focus:outline-none focus:border-orange-500 transition-colors"
                     >
-                      <option value="$2,500 (Standard Turnkey)">$2,500 (Standard Turnkey Package — Recommended)</option>
-                      <option value="$2,500 - $4,000 (Multi-City / Expanded Services)">$2,500 – $4,000 (Multi-City SEO / Expanded Services)</option>
-                      <option value="$4,000+ (Custom Enterprise / Portal)">$4,000+ (Custom Enterprise / Contractor Portal)</option>
+                      <option value="$500 (Standard Turnkey)">$500 (Standard Turnkey Package - Recommended)</option>
+                      <option value="$500 - $1,000 (Multi-City / Expanded Services)">$500 - $1,000 (Multi-City SEO / Expanded Services)</option>
+                      <option value="$1,000+ (Custom Enterprise / Portal)">$1,000+ (Custom Enterprise / Contractor Portal)</option>
                     </select>
                   </div>
 
