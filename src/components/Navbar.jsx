@@ -23,11 +23,10 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'bg-[#09090b]/85 backdrop-blur-md border-b border-white/10 shadow-lg py-3'
-          : 'bg-transparent py-5'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
+        ? 'bg-[#09090b]/85 backdrop-blur-md border-b border-white/10 shadow-lg py-3'
+        : 'bg-transparent py-5'
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
@@ -70,7 +69,7 @@ export default function Navbar() {
               <span className="text-xs text-zinc-400 font-mono">$500 / project</span>
             </div>
             <a
-              href="#contact"
+              href="https://calendly.com/fazilshaik103/30min"
               className="relative inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-orange-500 to-amber-600 rounded-xl overflow-hidden shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 group"
             >
               <span className="relative z-10 flex items-center gap-1.5">
