@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Send, CheckCircle2, AlertCircle, Copy, Check, Mail, MessageSquare, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Send, CheckCircle2, AlertCircle, Copy, Check, Mail, MessageSquare, ArrowRight, ShieldCheck, Loader2, ExternalLink } from 'lucide-react';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -12,10 +12,13 @@ export default function Contact() {
   });
 
   const [errors, setErrors] = useState({});
-  const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null); // null | 'success' | 'error'
+  const [errorMessage, setErrorMessage] = useState('');
   const [copiedEmail, setCopiedEmail] = useState(false);
 
-  const directEmail = 'fazilshaik103@gmail.com'; // Verified contact address
+  const directEmail = 'fazilshaik103@gmail.com';
+  const directMailtoLink = `mailto:${directEmail}?subject=${encodeURIComponent('Contractor Website Inquiry - Fazil Shaik')}`;
 
   const validate = () => {
     const errs = {};
@@ -32,7 +35,7 @@ export default function Contact() {
     return errs;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
@@ -41,7 +44,50 @@ export default function Contact() {
     }
 
     setErrors({});
-    setSubmitted(true);
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+    setErrorMessage('');
+
+    try {
+      const response = await fetch(`https://formsubmit.co/ajax/${directEmail}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          businessName: formData.businessName,
+          email: formData.email,
+          website: formData.website || 'None provided',
+          budget: formData.budget,
+          requirements: formData.requirements,
+          _subject: `New Client Project Inquiry: ${formData.businessName} (${formData.name})`,
+          _replyto: formData.email,
+          _template: 'table',
+          _captcha: 'false',
+          _url: typeof window !== 'undefined' ? window.location.href : 'https://fazil-portfolio-ivory.vercel.app',
+        }),
+      });
+
+      const result = await response.json().catch(() => ({}));
+
+      const isSuccess = response.ok && (result.success === 'true' || result.success === true);
+
+      if (isSuccess) {
+        setSubmitStatus('success');
+      } else {
+        throw new Error(result.message || 'Unable to deliver message at this time.');
+      }
+    } catch (err) {
+      console.error('Submission failed:', err);
+      setSubmitStatus('error');
+      setErrorMessage(
+        err.message || 'Network or browser extension prevented automated delivery. You can send your inquiry directly via your email client using the button below.'
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleCopyEmail = () => {
@@ -99,24 +145,58 @@ export default function Contact() {
                 </p>
               </div>
 
-              {/* Direct email card */}
-              <div className="p-4 rounded-xl bg-black/40 border border-white/5 space-y-2">
-                <div className="text-xs font-mono text-zinc-400 uppercase tracking-wider">
-                  Direct Email
-                </div>
-                <div className="flex items-center justify-between gap-2">
-                  <span className="text-sm font-semibold text-white font-mono break-all">
-                    {directEmail}
+              {/* Direct email card with direct access */}
+              <div className="p-5 rounded-2xl bg-black/50 border border-white/10 space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="text-xs font-mono text-zinc-400 uppercase tracking-wider flex items-center gap-1.5">
+                    <Mail className="w-3.5 h-3.5 text-orange-400" />
+                    <span>Direct Email Access</span>
+                  </div>
+                  <span className="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20 flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Direct Inbox
                   </span>
+                </div>
+                
+                <div className="flex items-center justify-between gap-2 p-3 rounded-xl bg-zinc-900/90 border border-white/5">
+                  <a
+                    href={directMailtoLink}
+                    className="text-sm font-semibold text-white font-mono break-all hover:text-orange-400 transition-colors"
+                    title="Click to open your email app"
+                  >
+                    {directEmail}
+                  </a>
                   <button
                     type="button"
                     onClick={handleCopyEmail}
-                    className="p-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white transition-colors shrink-0"
-                    title="Copy Email"
+                    className="p-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white transition-colors shrink-0 flex items-center gap-1 text-xs"
+                    title="Copy Email Address"
                   >
-                    {copiedEmail ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+                    {copiedEmail ? (
+                      <>
+                        <Check className="w-3.5 h-3.5 text-emerald-400" />
+                        <span className="text-emerald-400 text-[11px] font-mono">Copied</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-3.5 h-3.5" />
+                        <span className="text-zinc-400 text-[11px] font-mono">Copy</span>
+                      </>
+                    )}
                   </button>
                 </div>
+
+                <a
+                  href={directMailtoLink}
+                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-orange-500/10 hover:bg-orange-500/20 border border-orange-500/30 text-orange-300 hover:text-white font-mono text-xs font-semibold transition-all duration-200"
+                >
+                  <Mail className="w-4 h-4 text-orange-400" />
+                  <span>Open in Email App (Direct Mail)</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+                <p className="text-[11px] text-zinc-500 text-center font-mono">
+                  Opens Gmail, Outlook, or Apple Mail directly
+                </p>
               </div>
 
               {/* Verified Turnkey Highlights */}
@@ -150,42 +230,78 @@ export default function Contact() {
           <div data-aos="fade-up" data-aos-delay="150" className="lg:col-span-7">
             <div className="p-8 sm:p-10 rounded-3xl bg-zinc-900/90 border border-white/10 shadow-2xl relative">
               
-              {submitted ? (
-                <div className="py-12 text-center space-y-5">
+              {submitStatus === 'success' ? (
+                <div className="py-10 text-center space-y-5">
                   <div className="w-16 h-16 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto border border-emerald-500/30">
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
-                  <h3 className="text-2xl font-bold text-white">
-                    Project Inquiry Prepared!
-                  </h3>
+                  <div className="space-y-1">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-mono text-emerald-400">
+                      <Check className="w-3.5 h-3.5" /> Delivered to Inbox
+                    </span>
+                    <h3 className="text-2xl sm:text-3xl font-bold text-white mt-2">
+                      Inquiry Sent to Fazil!
+                    </h3>
+                  </div>
                   <p className="text-sm text-zinc-300 max-w-md mx-auto leading-relaxed">
-                    Thank you, <strong>{formData.name}</strong>. Your project brief for <strong>{formData.businessName}</strong> has been structured and validated.
+                    Thank you, <strong>{formData.name}</strong>. Your project brief has been dispatched directly to <strong>{directEmail}</strong>. I review every submission personally within 24 hours.
                   </p>
                   
-                  <div className="p-4 rounded-xl bg-black/50 border border-white/10 text-left text-xs font-mono space-y-1.5 max-w-md mx-auto">
+                  <div className="p-4 rounded-xl bg-black/60 border border-white/10 text-left text-xs font-mono space-y-1.5 max-w-md mx-auto shadow-inner">
+                    <div className="flex justify-between items-center text-zinc-400 border-b border-zinc-800/80 pb-2 mb-1">
+                      <span className="text-[11px] uppercase tracking-wider">Transmission Receipt</span>
+                      <span className="text-emerald-400 text-[11px] font-semibold">Status: Delivered</span>
+                    </div>
                     <div><span className="text-zinc-500">Business:</span> <span className="text-zinc-200">{formData.businessName}</span></div>
                     <div><span className="text-zinc-500">Work Email:</span> <span className="text-zinc-200">{formData.email}</span></div>
                     <div><span className="text-zinc-500">Target Budget:</span> <span className="text-orange-400">{formData.budget}</span></div>
+                    <div><span className="text-zinc-500">Delivered To:</span> <span className="text-zinc-300">{directEmail}</span></div>
                   </div>
 
-                  <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
+                  <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
                     <a
                       href={mailtoLink}
-                      className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold text-sm shadow-lg shadow-orange-500/25 transition-colors"
+                      className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold text-sm shadow-lg shadow-orange-500/25 transition-colors gap-2"
                     >
-                      <Send className="w-4 h-4 mr-2" /> Open in Email Client
+                      <Mail className="w-4 h-4" /> Email Additional Files
                     </a>
                     <button
                       type="button"
-                      onClick={() => setSubmitted(false)}
+                      onClick={() => {
+                        setSubmitStatus(null);
+                        setFormData({
+                          name: '',
+                          businessName: '',
+                          email: '',
+                          website: '',
+                          budget: '$500 (Standard Turnkey)',
+                          requirements: '',
+                        });
+                      }}
                       className="w-full sm:w-auto px-6 py-3 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-semibold text-sm transition-colors"
                     >
-                      Edit Inquiry Details
+                      Send Another Inquiry
                     </button>
                   </div>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
+                  {submitStatus === 'error' && (
+                    <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-xs text-red-300 space-y-2">
+                      <div className="flex items-center gap-2 font-semibold text-red-200">
+                        <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
+                        <span>Could not dispatch automated form</span>
+                      </div>
+                      <p>{errorMessage}</p>
+                      <a
+                        href={mailtoLink}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-orange-500/20 hover:bg-orange-500/30 text-orange-200 hover:text-white font-medium transition-colors"
+                      >
+                        <Mail className="w-3.5 h-3.5" />
+                        <span>Send directly via Email Client instead</span>
+                      </a>
+                    </div>
+                  )}
                   
                   {/* Name & Business Name */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -290,15 +406,34 @@ export default function Contact() {
                   {/* Submit Button */}
                   <button
                     type="submit"
-                    className="w-full py-4 rounded-xl bg-gradient-to-r from-orange-500 via-orange-600 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white font-bold text-base shadow-xl shadow-orange-500/25 transition-all duration-200 flex items-center justify-center gap-2 group"
+                    disabled={isSubmitting}
+                    className="w-full py-4 rounded-xl bg-gradient-to-r from-orange-500 via-orange-600 to-amber-600 hover:from-orange-600 hover:to-amber-700 disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold text-base shadow-xl shadow-orange-500/25 transition-all duration-200 flex items-center justify-center gap-2 group"
                   >
-                    <span>Send Project Inquiry</span>
-                    <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        <span>Transmitting to Fazil's Inbox...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Send Directly to My Inbox</span>
+                        <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                      </>
+                    )}
                   </button>
 
-                  <div className="flex items-center justify-center gap-2 text-xs text-zinc-500 text-center">
-                    <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                    <span>Strict confidentiality. No spam. You will hear back in &lt; 24 hours.</span>
+                  <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-500 pt-1">
+                    <div className="flex items-center gap-1.5">
+                      <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+                      <span>Drops directly to {directEmail}</span>
+                    </div>
+                    <a
+                      href={mailtoLink}
+                      className="text-orange-400 hover:text-orange-300 transition-colors inline-flex items-center gap-1 font-mono text-[11px]"
+                    >
+                      <Mail className="w-3.5 h-3.5" />
+                      <span>Or compose in email client</span>
+                    </a>
                   </div>
 
                 </form>

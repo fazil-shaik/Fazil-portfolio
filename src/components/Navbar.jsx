@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ArrowUpRight, Phone, Hammer } from 'lucide-react';
+import { Menu, X, ArrowUpRight, Phone, Hammer, Mail } from 'lucide-react';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -126,6 +126,13 @@ export default function Navbar() {
               className="w-full text-center py-3 text-sm font-semibold text-white bg-gradient-to-r from-orange-500 to-amber-600 rounded-xl shadow-lg shadow-orange-500/25"
             >
               Discuss Your Project
+            </a>
+            <a
+              href="mailto:fazilshaik103@gmail.com"
+              className="w-full py-2.5 px-3 text-xs font-mono text-zinc-300 hover:text-white bg-zinc-900/90 border border-white/10 rounded-xl flex items-center justify-center gap-2 transition-colors"
+            >
+              <Mail className="w-3.5 h-3.5 text-orange-400" />
+              <span>fazilshaik103@gmail.com</span>
             </a>
           </div>
         </div>
